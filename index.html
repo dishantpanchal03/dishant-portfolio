@@ -15,77 +15,95 @@
     <style>
         :root {
             --primary-blue: #0d6efd;
-            --dark-bg: #1a1d21;
+            --bg-light: #f8f9fa;
         }
 
-        body { font-family: 'Inter', sans-serif; overflow-x: hidden; color: #333; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-light); 
+            color: #333; 
+        }
 
-        /* Hero Section */
+        /* --- Scroll Progress Bar --- */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            z-index: 2000;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+        }
+        .progress-bar-scroll {
+            height: 4px;
+            background: var(--primary-blue);
+            width: 0%;
+        }
+
+        /* --- Full Width Header (Restored Size) --- */
         .hero {
             background: linear-gradient(135deg, #1a1d21 0%, #081a33 100%);
             color: white;
-            padding: 100px 0;
+            padding: 180px 0;
             min-height: 80vh;
             display: flex;
             align-items: center;
         }
-
         .profile-img {
-            width: 280px; height: 280px;
+            width: 300px; height: 300px;
             object-fit: cover;
             border: 8px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transition: all 0.4s ease;
         }
 
-        /* Timeline */
+        /* --- Boxed Section Layout --- */
+        .content-box {
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .section-title {
+            font-weight: 800;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        /* --- Timeline & Skills --- */
         .timeline-item {
-            padding-left: 30px;
+            padding-left: 25px;
             border-left: 2px solid var(--primary-blue);
             position: relative;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         .timeline-item::before {
-            content: ''; position: absolute; left: -9px; top: 0;
+            content: ''; position: absolute; left: -9px; top: 5px;
             width: 16px; height: 16px; border-radius: 50%; background: var(--primary-blue);
         }
 
-        /* Skill Badges (No Progress Bars) */
         .skill-pill {
             display: inline-block;
-            padding: 12px 25px;
-            margin: 8px;
-            background: white;
-            border: 1px solid #eee;
+            padding: 10px 20px;
+            margin: 5px;
+            background: #f1f4f9;
             border-radius: 50px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: 0.3s;
         }
-        .skill-pill:hover {
-            color: white;
-            background: var(--primary-blue);
-            transform: translateY(-3px);
-        }
+        .skill-pill:hover { background: var(--primary-blue); color: white; }
 
-        /* Section Styling */
-        section { padding: 90px 0; }
-        .section-title { font-weight: 800; margin-bottom: 50px; text-align: center; }
-
-        .project-card {
-            border: none; border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        .project-card:hover { transform: translateY(-10px); }
+        footer { padding: 40px 0; color: #888; text-align: center; }
     </style>
 </head>
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">ENGINEER.IO</a>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white shadow-sm px-lg-5">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Portfolio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -93,9 +111,10 @@
                 <ul class="navbar-nav ms-auto text-uppercase small fw-bold">
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Work</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     <li class="nav-item ms-lg-3">
-                        <!-- RESUME BUTTON -->
                         <a class="btn btn-primary rounded-pill px-4 text-white" href="resume.pdf" target="_blank">
                             <i class="fas fa-file-download me-2"></i>My Resume
                         </a>
@@ -105,124 +124,126 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Full Size Header -->
+    <header class="hero">
         <div class="container">
-            <div class="row align-items-center text-center text-lg-start">
+            <div class="row align-items-center text-lg-start">
                 <div class="col-lg-4 mb-5 mb-lg-0" data-aos="zoom-in">
-                    <img src="https://via.placeholder.com/300" alt="Profile" class="profile-img shadow-lg">
+                    <img src="profile.PNG" alt="Profile" class="profile-img shadow-lg">
                 </div>
-                <div class="col-lg-8" data-aos="fade-left">
+                <div class="col-lg-7" data-aos="fade-left">
                     <h1 class="display-3 fw-bold mb-3">Hi, I'm <span id="typed" class="text-info"></span></h1>
-                    <p class="lead mb-4 text-secondary">A final-year engineering student building efficient systems and user-centric digital experiences.</p>
-                    <a href="#projects" class="btn btn-primary btn-lg rounded-pill px-5 shadow">View My Work</a>
+                    <p class="lead text-secondary mb-4">V Semester Engineering Student | Java Developer | UI/UX Enthusiast</p>
+                    <a href="#contact" class="btn btn-primary btn-lg rounded-pill px-5">Get In Touch</a>
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- About Section -->
-    <section id="about" class="bg-light">
-        <div class="container text-center" data-aos="fade-up">
+    <main class="container">
+        <!-- About Box -->
+        <div id="about" class="content-box" data-aos="fade-up">
             <h2 class="section-title">About Me</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <p class="text-muted fs-5">I am a passionate engineering student focused on solving complex problems. I specialize in backend architecture with Java and crafting modern, responsive interfaces using HTML, CSS, and Bootstrap.</p>
-                </div>
+            <p class="text-center text-muted">I am a passionate engineering student focused on solving complex problems. I specialize in backend architecture with Java and crafting modern, responsive interfaces for global users.</p>
+        </div>
+
+        <!-- Education Box -->
+        <div id="education" class="content-box" data-aos="fade-up">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline-item">
+                <h5 class="fw-bold text-primary">B.Tech in Computer Science</h5>
+                <p class="mb-1 fw-bold">V Semester (2024-25)</p>
+                <p class="small text-muted">Specializing in Operating Systems, Compiler Design, and Graphics.</p>
+            </div>
+            <div class="timeline-item">
+                <h5>Senior Secondary (XII)</h5>
+                <p class="mb-1 fw-bold">Completed 2022</p>
+                <p class="small text-muted">Major in Physics, Chemistry, and Mathematics.</p>
+            </div>
+            <div class="timeline-item">
+                <h5>Secondary Education (X)</h5>
+                <p class="mb-1 fw-bold">Completed 2020</p>
+                <p class="small text-muted">Foundational education with a focus on science and logic.</p>
             </div>
         </div>
-    </section>
 
-    <!-- Education Section -->
-    <section id="education">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title">Education</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-10" data-aos="fade-up">
-                    <div class="timeline-item">
-                        <h5>Graduation: B.Tech in Computer Science</h5>
-                        <p class="text-primary fw-bold">V Semester (2024-25)</p>
-                        <p class="text-muted">Focusing on Compiler Design, Operating Systems, Computer Graphics, and Java Logic.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h5>Senior Secondary (XII)</h5>
-                        <p class="text-primary fw-bold">Completed 2022</p>
-                        <p class="text-muted">Major in Physics, Chemistry, and Mathematics.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h5>Secondary Education (X)</h5>
-                        <p class="text-primary fw-bold">Completed 2020</p>
-                        <p class="text-muted">Foundational education with a focus on science and logic.</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Skills Box -->
+        <div id="skills" class="content-box text-center" data-aos="fade-up">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skill-pill">Java (JDBC/AWT)</div>
+            <div class="skill-pill">HTML5 & CSS3</div>
+            <div class="skill-pill">Bootstrap 5</div>
+            <div class="skill-pill">UI/UX Design</div>
+            <div class="skill-pill">SQL & Database</div>
+            <div class="skill-pill">Multithreading</div>
         </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title">Technical Skills</h2>
-            </div>
-            <div class="text-center" data-aos="zoom-in">
-                <div class="skill-pill"><i class="fab fa-java text-primary me-2"></i> Java (JDBC/AWT)</div>
-                <div class="skill-pill"><i class="fab fa-html5 text-danger me-2"></i> HTML5 & CSS3</div>
-                <div class="skill-pill"><i class="fab fa-bootstrap text-purple me-2"></i> Bootstrap 5</div>
-                <div class="skill-pill"><i class="fas fa-pencil-ruler text-success me-2"></i> UI/UX Design</div>
-                <div class="skill-pill"><i class="fas fa-database text-info me-2"></i> SQL & Database</div>
-                <div class="skill-pill"><i class="fas fa-code-branch text-dark me-2"></i> Multithreading</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
-            <div class="text-center mb-5"><h2 class="section-title">Featured Work</h2></div>
+        <!-- Work/Projects Box -->
+        <div id="projects" class="content-box" data-aos="fade-up">
+            <h2 class="section-title">Featured Work</h2>
             <div class="row g-4">
-                <div class="col-md-4" data-aos="flip-left">
-                    <div class="card project-card h-100 p-4">
-                        <i class="fas fa-database fs-1 text-primary mb-3"></i>
-                        <h5 class="fw-bold">Java Backend System</h5>
-                        <p class="text-muted small">A robust system using JDBC for secure database management and multithreaded transactions.</p>
+                <div class="col-md-6">
+                    <div class="p-4 border rounded">
+                        <h6>Backend System</h6>
+                        <p class="small text-muted mb-0">High-performance transaction logic built with Java and JDBC.</p>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
-                    <div class="card project-card h-100 p-4 bg-primary text-white text-center">
-                        <i class="fas fa-laptop-code fs-1 mb-3"></i>
-                        <h5 class="fw-bold">Algorithm Visualizer</h5>
-                        <p class="small">An interactive tool built to visualize sorting algorithms in real-time using modern CSS.</p>
-                    </div>
-                </div>
-                <div class="col-md-4" data-aos="flip-left" data-aos-delay="400">
-                    <div class="card project-card h-100 p-4">
-                        <i class="fas fa-paint-brush fs-1 text-primary mb-3"></i>
-                        <h5 class="fw-bold">UI Design Kit</h5>
-                        <p class="text-muted small">A fully responsive component library developed with Bootstrap 5 and custom animations.</p>
+                <div class="col-md-6">
+                    <div class="p-4 border rounded">
+                        <h6>Algo Visualizer</h6>
+                        <p class="small text-muted mb-0">Real-time tool visualizing sorting and searching algorithms.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="py-4 bg-dark text-white text-center">
-        <div class="container">
-            <p class="mb-0 opacity-50 small">&copy; 2026 Engineering Student Portfolio.</p>
+        <!-- Contact Box -->
+        <div id="contact" class="content-box" data-aos="fade-up">
+            <h2 class="section-title">Contact Me</h2>
+            <p class="text-center text-muted mb-4">Feel free to reach out for collaborations or just a friendly hello!</p>
+            
+            <form action="mailto:dishantpanchal0311@gmail.com" method="post" enctype="text/plain">
+                <div class="mb-3">
+                    <input type="text" name="Name" class="form-control form-control-lg" placeholder="Name" required>
+                </div>
+                <div class="mb-3">
+                    <input type="email" name="Email" class="form-control form-control-lg" placeholder="Email" required>
+                </div>
+                <div class="mb-3">
+                    <textarea name="Message" class="form-control form-control-lg" rows="4" placeholder="Message" required></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5">Send Message</button>
+                </div>
+            </form>
+            
+            <div class="text-center mt-4 pt-3 border-top">
+                <p class="mb-0 fw-bold">Direct Email:</p>
+                <a href="mailto:dishantpanchal0311@gmail.com" class="text-primary text-decoration-none">dishantpanchal0311@gmail.com</a>
+            </div>
         </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Engineering Student Portfolio.</p>
     </footer>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
-        AOS.init({ duration: 1000, once: true });
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        };
+
+        AOS.init({ duration: 800, once: true });
         new Typed('#typed', {
-            strings: ['an Engineering Student.', 'a Java Developer.', 'a UI/UX Designer.'],
+            strings: ['Dishant Panchal', 'a DevOps Engineer'],
             typeSpeed: 50, backSpeed: 30, loop: true
         });
     </script>
