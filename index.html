@@ -55,10 +55,19 @@
             border-radius: 50%;
         }
 
-        /* Keeps typing element on one line cleanly and reduces shift layout */
         .typed-wrapper {
             display: inline-block;
             white-space: nowrap;
+        }
+
+        /* Custom Social Button Style for LinkedIn in Navbar */
+        .btn-nav-linkedin {
+            color: #0077b5;
+            border-color: #0077b5;
+        }
+        .btn-nav-linkedin:hover {
+            background-color: #0077b5;
+            color: white;
         }
 
         /* --- Boxed Section Layout --- */
@@ -119,18 +128,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-uppercase small fw-bold">
+                <ul class="navbar-nav ms-auto text-uppercase small fw-bold align-items-center">
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Work</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-primary rounded-pill px-4 text-white" href="resume.pdf" target="_blank">
-                            <i class="fas fa-file-download me-2"></i>My Resume
-                        </a>
-                    </li>
                 </ul>
+                
+                <!-- Social Action Buttons on Navbar Right -->
+                <div class="d-flex gap-2 ms-lg-3 mt-3 mt-lg-0 justify-content-center">
+                    <a href="https://github.com/dishantpanchal03/" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill px-3" title="GitHub">
+                        <i class="fab fa-github me-1"></i>GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/dishant-panchal-6b40b62aa/" target="_blank" class="btn btn-nav-linkedin btn-sm rounded-pill px-3" title="LinkedIn">
+                        <i class="fab fa-linkedin me-1"></i>LinkedIn
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -147,7 +161,10 @@
                         Hi, I'm <span class="typed-wrapper text-info"><span id="typed"></span></span>
                     </h1>
                     <p class="lead text-secondary mb-4">V Semester Engineering Student | Java Developer | UI/UX Enthusiast</p>
-                    <a href="#contact" class="btn btn-primary btn-lg rounded-pill px-5">Get In Touch</a>
+                    
+                    <a href="resume.pdf" target="_blank" class="btn btn-primary btn-lg rounded-pill px-5">
+                        <i class="fas fa-file-download me-2"></i>My Resume
+                    </a>
                 </div>
             </div>
         </div>
@@ -223,7 +240,7 @@
                     <input type="email" name="Email" class="form-control form-control-lg" placeholder="Email" required>
                 </div>
                 <div class="mb-3">
-                    <input type="message" name="Message" class="form-control form-control-lg" rows="4" placeholder="Message" required></input>
+                    <textarea name="Message" class="form-control form-control-lg" rows="4" placeholder="Message" required></textarea>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5">Send Message</button>
@@ -247,16 +264,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // window.onscroll = function() {
-        //     var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        //     var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        //     var scrolled = (winScroll / height) * 100;
-        //     var myBar = document.getElementById("myBar");
-        //     if (myBar) {
-        //         myBar.style.width = scrolled + "%";
-        //     }
-        // };
-
+        
         AOS.init({ duration: 800, once: true });
         
         new Typed('#typed', {
