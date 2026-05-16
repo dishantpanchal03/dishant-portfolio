@@ -11,11 +11,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- AOS Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary-blue: #0d6efd;
-            --bg-light: #f8f9fa;
+            --accent-glow: rgba(13, 110, 253, 0.15);
+            --bg-light: #f4f7fa;
+            --card-bg: #ffffff;
         }
 
         body { 
@@ -41,23 +45,42 @@
 
         /* --- Full Width Header --- */
         .hero {
-            background: linear-gradient(135deg, #1a1d21 0%, #081a33 100%);
+            background: linear-gradient(135deg, #121519 0%, #061324 100%);
             color: white;
-            padding: 180px 0;
-            min-height: 80vh;
+            padding: 160px 0;
+            min-height: 85vh;
             display: flex;
             align-items: center;
         }
         .profile-img {
             width: 300px; height: 300px;
             object-fit: cover;
-            border: 8px solid rgba(255, 255, 255, 0.1);
+            border: 8px solid rgba(255, 255, 255, 0.05);
             border-radius: 50%;
+            box-shadow: 0 0 40px rgba(13, 110, 253, 0.25);
+        }
+
+        /* Responsive title layout preventing single-line overflow collapse */
+        .hero-title {
+            font-weight: 800;
+            margin-bottom: 1rem;
+            font-size: calc(1.6rem + 2vw);
+            line-height: 1.2;
+        }
+        @media (min-width: 992px) {
+            .hero-title {
+                font-size: 2.85rem; /* Explicit size to keep text on one single line */
+            }
         }
 
         .typed-wrapper {
             display: inline-block;
             white-space: nowrap;
+        }
+
+        /* Fixed block height for the dynamic header content to keep elements below completely stationary */
+        .hero-text-block {
+            min-height: 150px;
         }
 
         /* Custom Social Button Style for LinkedIn in Navbar */
@@ -70,47 +93,153 @@
             color: white;
         }
 
-        /* --- Boxed Section Layout --- */
+        /* --- Modern Dynamic Boxed Layout --- */
         .content-box {
-            max-width: 900px;
-            margin: 0 auto 40px auto;
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+            max-width: 950px;
+            margin: 0 auto 50px auto;
+            background: var(--card-bg);
+            padding: 55px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03), 0 5px 15px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .content-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(13, 110, 253, 0.05), 0 5px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        #about {
+            margin-top: 90px;
         }
 
         .section-title {
             font-weight: 800;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             text-align: center;
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 45px;
+            height: 4px;
+            background: var(--primary-blue);
+            margin: 12px auto 0 auto;
+            border-radius: 2px;
         }
 
-        /* --- Timeline & Skills --- */
+        /* --- Timeline & Education UI --- */
         .timeline-item {
-            padding-left: 25px;
-            border-left: 2px solid var(--primary-blue);
+            padding-left: 30px;
+            border-left: 2px dashed #dee2e6;
             position: relative;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 10px;
+            border-left-color: transparent;
         }
         .timeline-item::before {
-            content: ''; position: absolute; left: -9px; top: 5px;
-            width: 16px; height: 16px; border-radius: 50%; background: var(--primary-blue);
-        }
-
-        .skill-pill {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            background: #f1f4f9;
-            border-radius: 50px;
-            font-weight: 600;
+            content: ''; 
+            position: absolute; 
+            left: -7px; 
+            top: 6px;
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            background: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);
             transition: 0.3s;
         }
-        .skill-pill:hover { background: var(--primary-blue); color: white; }
+        .timeline-item:hover::before {
+            background: #20c997;
+            box-shadow: 0 0 0 5px rgba(32, 201, 151, 0.2);
+        }
 
-        footer { padding: 40px 0; color: #888; text-align: center; }
+        /* --- Refined Categorized Skills --- */
+        .skill-group-container {
+            background: #fafbfc;
+            border: 1px solid #edf1f5;
+            border-radius: 16px;
+            padding: 24px;
+            height: 100%;
+        }
+        .skill-group-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        .skill-pill {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #4a5568;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .skill-pill:hover { 
+            background: var(--primary-blue); 
+            color: white; 
+            border-color: var(--primary-blue);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+        }
+
+        /* --- Modern Project Cards --- */
+        .project-card {
+            background: white;
+            border: 1px solid #eef2f6;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+            border-top: 4px solid var(--primary-blue);
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+            border-top-color: #20c997;
+        }
+        .tech-badge {
+            font-size: 0.75rem;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        /* --- Form Control Styling --- */
+        .form-control {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .form-control:focus {
+            background-color: white;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        footer { padding: 50px 0; color: #718096; text-align: center; font-size: 0.95rem; }
     </style>
 </head>
 <body>
@@ -123,7 +252,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white shadow-sm px-lg-5">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="#">Portfolio</a>
+            <a class="navbar-brand fw-bold text-dark" href="#">Dishant's Portfolio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -132,7 +261,7 @@
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Work</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
                 
@@ -149,20 +278,22 @@
         </div>
     </nav>
 
-    <!-- Full Size Header -->
+    <!-- Hero Header -->
     <header class="hero">
         <div class="container">
-            <div class="row align-items-center text-lg-start">
+            <div class="row align-items-center text-center text-lg-start">
                 <div class="col-lg-4 mb-5 mb-lg-0" data-aos="zoom-in">
                     <img src="profile.PNG" alt="Profile" class="profile-img shadow-lg">
                 </div>
                 <div class="col-lg-8" data-aos="fade-left">
-                    <h1 class="display-3 fw-bold mb-3">
-                        Hi, I'm <span class="typed-wrapper text-info"><span id="typed"></span></span>
-                    </h1>
-                    <p class="lead text-secondary mb-4">DevOps Enthusiast | Cloud & Automation Learner | CSE Student</p>
+                    <div class="hero-text-block">
+                        <h1 class="hero-title">
+                            Hi, I'm <span class="typed-wrapper text-info"><span id="typed"></span></span>
+                        </h1>
+                        <p class="lead text-secondary mb-4 opacity-75">DevOps Engineer | Cloud & Automation Specialist | CSE Student</p>
+                    </div>
                     
-                    <a href="Dishant Panchal.pdf" target="_blank" class="btn btn-primary btn-lg rounded-pill px-5">
+                    <a href="Dishant Panchal.pdf" target="_blank" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">
                         <i class="fas fa-file-download me-2"></i>My Resume
                     </a>
                 </div>
@@ -174,54 +305,112 @@
         <!-- About Box -->
         <div id="about" class="content-box" data-aos="fade-up">
             <h2 class="section-title">About Me</h2>
-            <p class="text-center text-muted">I’m a DevOps enthusiast and fresher, passionate about cloud technologies, automation, and infrastructure management. I have hands-on experience with tools like Docker, Git, Jenkins, Linux, and Kubernetes through personal projects and continuous learning. I enjoy building CI/CD pipelines and exploring modern DevOps practices to improve software delivery and system reliability.</p>
+            <p class="text-center text-muted lh-lg max-width-md mx-auto mb-0" style="max-width: 760px;">I’m a DevOps enthusiast and fresher, passionate about cloud technologies, automation, and infrastructure management. I have hands-on experience with tools like Docker, Git, Jenkins, Linux, and Kubernetes through personal projects and continuous learning. I enjoy building CI/CD pipelines and exploring modern DevOps practices to improve software delivery and system reliability.</p>
         </div>
 
         <!-- Education Box -->
         <div id="education" class="content-box" data-aos="fade-up">
             <h2 class="section-title">Education</h2>
-            <div class="timeline-item">
-                <h5 class="fw-bold text-primary">B.Tech in Computer Science</h5>
-                <p class="mb-1 fw-bold">Batch (2023 - 2027)</p>
-                <p class="small text-muted">Focused on software development, cloud computing, and DevOps concepts.</p>
-            </div>
-            <div class="timeline-item">
-                <h5>Senior Secondary (XII)</h5>
-                <p class="mb-1 fw-bold">Completed 2023</p>
-                <p class="small text-muted">Studied Physics, Chemistry, and Mathematics with analytical focus.</p>
-            </div>
-            <div class="timeline-item">
-                <h5>Secondary Education (X)</h5>
-                <p class="mb-1 fw-bold">Completed 2021</p>
-                <p class="small text-muted">Developed foundational knowledge in science, mathematics, and computing.</p>
+            <div class="ps-2 pt-2">
+                <div class="timeline-item">
+                    <h5 class="fw-bold text-dark mb-1">B.Tech in Computer Science</h5>
+                    <div class="badge bg-primary-subtle text-primary mb-2 px-2 py-1 rounded">Batch (2023 - 2027)</div>
+                    <p class="small text-muted">Focused on software development, cloud computing, and DevOps concepts.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold text-dark mb-1">Senior Secondary (XII)</h5>
+                    <div class="badge bg-secondary-subtle text-secondary mb-2 px-2 py-1 rounded">Completed 2023</div>
+                    <p class="small text-muted">Studied Physics, Chemistry, and Mathematics with analytical focus.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold text-dark mb-1">Secondary Education (X)</h5>
+                    <div class="badge bg-secondary-subtle text-secondary mb-2 px-2 py-1 rounded">Completed 2021</div>
+                    <p class="small text-muted">Developed foundational knowledge in science, mathematics, and computing.</p>
+                </div>
             </div>
         </div>
 
         <!-- Skills Box -->
-        <div id="skills" class="content-box text-center" data-aos="fade-up">
+        <div id="skills" class="content-box" data-aos="fade-up">
             <h2 class="section-title">Technical Skills</h2>
-            <div class="skill-pill">Java (JDBC/AWT)</div>
-            <div class="skill-pill">HTML5 & CSS3</div>
-            <div class="skill-pill">Bootstrap 5</div>
-            <div class="skill-pill">UI/UX Design</div>
-            <div class="skill-pill">SQL & Database</div>
-            <div class="skill-pill">Multithreading</div>
-        </div>
-
-        <!-- Work/Projects Box -->
-        <div id="projects" class="content-box" data-aos="fade-up">
-            <h2 class="section-title">Featured Work</h2>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="p-4 border rounded">
-                        <h6>Backend System</h6>
-                        <p class="small text-muted mb-0">High-performance transaction logic built with Java and JDBC.</p>
+            
+            <div class="row g-4 text-center">
+                <!-- Group 1 -->
+                <div class="col-md-6 col-12">
+                    <div class="skill-group-container">
+                        <div class="skill-group-title"><i class="fas fa-server me-2 text-primary"></i>DevOps & Cloud</div>
+                        <div class="skill-pill">Linux</div>
+                        <div class="skill-pill">Git & GitHub</div>
+                        <div class="skill-pill">Docker</div>
+                        <div class="skill-pill">Kubernetes</div>
+                        <div class="skill-pill">Jenkins</div>
+                        <div class="skill-pill">CI/CD Pipelines</div>
+                        <div class="skill-pill">AWS Cloud</div>
+                        <div class="skill-pill">Shell Scripting</div>
+                        <div class="skill-pill">Terraform</div>
+                        <div class="skill-pill">Ansible</div>
+                        <div class="skill-pill">Nginx</div>
+                        <div class="skill-pill">Grafana</div>
+                        <div class="skill-pill">YAML</div>
                     </div>
                 </div>
+                
+                <!-- Group 2 -->
+                <div class="col-md-6 col-12">
+                    <div class="skill-group-container d-flex flex-column justify-content-between h-100">
+                        <div>
+                            <div class="skill-group-title"><i class="fas fa-code me-2 text-primary"></i>Languages & Core</div>
+                            <div class="skill-pill">Java</div>
+                            <div class="skill-pill">C & C++</div>
+                            <div class="skill-pill">Python</div>
+                            <div class="skill-pill">SQL & Databases</div>
+                            <div class="skill-pill">HTML & CSS</div>
+                        </div>
+                        <div class="mt-4 border-top pt-3">
+                            <div class="skill-group-title"><i class="fas fa-palette me-2 text-primary"></i>Design & Strategy</div>
+                            <div class="skill-pill">Networking Basics</div>
+                            <div class="skill-pill">Monitoring & Logging</div>
+                            <div class="skill-pill">UI/UX Design</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DevOps Work/Projects Box -->
+        <div id="projects" class="content-box" data-aos="fade-up">
+            <h2 class="section-title">My Projects</h2>
+            <div class="row g-4 mt-1">
+                <!-- Project 1 -->
                 <div class="col-md-6">
-                    <div class="p-4 border rounded">
-                        <h6>Algo Visualizer</h6>
-                        <p class="small text-muted mb-0">Real-time tool visualizing sorting and searching algorithms.</p>
+                    <div class="project-card p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary-subtle p-2.5 rounded-3 text-primary me-3 px-3 py-2 fw-bold"><i class="fas fa-infinity"></i></div>
+                            <h5 class="fw-bold mb-0 text-dark">CI/CD Pipeline for Sample Application</h5>
+                        </div>
+                        <p class="small text-muted mb-3">Designed and implemented an automated Jenkins declarative pipeline triggering on Git webhooks. Code changes compile, execute unit tests, build isolated Docker containers, and automatically push verified images to Docker Hub repositories.</p>
+                        <div class="pt-2 border-top">
+                            <span class="tech-badge">Jenkins</span>
+                            <span class="tech-badge">Docker</span>
+                            <span class="tech-badge">Git</span>
+                            <span class="tech-badge">Linux</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="col-md-6">
+                    <div class="project-card p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary-subtle p-2.5 rounded-3 text-primary me-3 px-3 py-2 fw-bold"><i class="fas fa-cloud"></i></div>
+                            <h5 class="fw-bold mb-0 text-dark">Infrastructure as Code & Cloud Provisioning</h5>
+                        </div>
+                        <p class="small text-muted mb-3">Authored modular Terraform configurations to automate deployment of high-availability AWS cloud architecture. Integrated Ansible playbooks to dynamically configure web infrastructure, initialize Nginx servers, and implement basic firewalls.</p>
+                        <div class="pt-2 border-top">
+                            <span class="tech-badge">Terraform</span>
+                            <span class="tech-badge">AWS EC2</span>
+                            <span class="tech-badge">Ansible</span>
+                            <span class="tech-badge">Nginx</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,29 +422,31 @@
             <p class="text-center text-muted mb-4">Feel free to reach out for collaborations or just a friendly hello!</p>
             
             <form action="mailto:dishantpanchal0311@gmail.com" method="post" enctype="text/plain">
-                <div class="mb-3">
-                    <input type="text" name="Name" class="form-control form-control-lg" placeholder="Name" required>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <input type="text" name="Name" class="form-control form-control-lg" placeholder="Name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="email" name="Email" class="form-control form-control-lg" placeholder="Email" required>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <input type="email" name="Email" class="form-control form-control-lg" placeholder="Email" required>
-                </div>
-                <div class="mb-3">
-                    <textarea name="Message" class="form-control form-control-lg" rows="4" placeholder="Message" required></textarea>
+                <div class="mb-4">
+                    <textarea name="Message" class="form-control form-control-lg" rows="4" placeholder="Your Message..." required></textarea>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5">Send Message</button>
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">Send Message</button>
                 </div>
             </form>
             
-            <div class="text-center mt-4 pt-3 border-top">
-                <p class="mb-0 fw-bold">Direct Email:</p>
-                <a href="mailto:dishantpanchal0311@gmail.com" class="text-primary text-decoration-none">dishantpanchal0311@gmail.com</a>
+            <div class="text-center mt-5 pt-4 border-top">
+                <p class="mb-1 small text-secondary text-uppercase fw-bold tracking-wide">Direct Inbox</p>
+                <a href="mailto:dishantpanchal0311@gmail.com" class="text-primary fs-5 text-decoration-none fw-semibold">dishantpanchal0311@gmail.com</a>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Engineering Student Portfolio.</p>
+        <p class="mb-0">&copy; 2026 Engineering Student Portfolio. Built clean.</p>
     </footer>
 
     <!-- Scripts -->
@@ -264,8 +455,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 600, once: false});
         
         new Typed('#typed', {
             strings: ['Dishant Panchal', 'a DevOps Engineer'],
