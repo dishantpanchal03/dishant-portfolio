@@ -22,6 +22,10 @@
             --card-bg: #ffffff;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: var(--bg-light); 
@@ -60,7 +64,6 @@
             box-shadow: 0 0 40px rgba(13, 110, 253, 0.25);
         }
 
-        /* Responsive title layout preventing single-line overflow collapse */
         .hero-title {
             font-weight: 800;
             margin-bottom: 1rem;
@@ -69,7 +72,7 @@
         }
         @media (min-width: 992px) {
             .hero-title {
-                font-size: 2.85rem; /* Explicit size to keep text on one single line */
+                font-size: 2.85rem;
             }
         }
 
@@ -78,12 +81,10 @@
             white-space: nowrap;
         }
 
-        /* Fixed block height for the dynamic header content to keep elements below completely stationary */
         .hero-text-block {
             min-height: 150px;
         }
 
-        /* Custom Social Button Style for LinkedIn in Navbar */
         .btn-nav-linkedin {
             color: #0077b5;
             border-color: #0077b5;
@@ -239,10 +240,35 @@
             box-shadow: 0 0 0 4px var(--accent-glow);
         }
 
-        footer { padding: 50px 0; color: #718096; text-align: center; font-size: 0.95rem; }
+        /* --- Styled Comprehensive Footer --- */
+        footer { 
+            background-color: #121519; 
+            color: #a0aec0; 
+            padding: 20px 0 20px 0; 
+            font-size: 0.95rem; 
+        }
+        footer p { margin-bottom: 0.5rem; }
+        footer a { transition: color 0.2s ease; }
+        .footer-social-icon {
+            font-size: 1.4rem;
+            color: #a0aec0;
+        }
+        .footer-social-icon:hover {
+            color: white;
+        }
+        .footer-tech-badge {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.06);
+            color: #cbd5e1;
+            padding: 5px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            margin: 0 3px;
+        }
     </style>
 </head>
-<body>
+<body id="top">
 
     <!-- Scroll Progress Bar -->
     <div class="progress-container">
@@ -445,8 +471,31 @@
         </div>
     </main>
 
+    <!-- Comprehensive Portfolio Footer -->
     <footer>
-        <p class="mb-0">&copy; 2026 Engineering Student Portfolio. Built clean.</p>
+        <div class="container text-center">
+            <!-- Back to Top Block -->
+            <div class="mb-4">
+                <a href="#top" class="btn btn-outline-light btn-sm rounded-pill px-3 py-1.5 opacity-75 text-decoration-none">
+                    <i class="fas fa-arrow-up me-1"></i> Back to Top
+                </a>
+            </div>
+
+            <!-- Social Media Navigation Shortcuts -->
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <a href="https://github.com/dishantpanchal03/" target="_blank" class="footer-social-icon" title="GitHub Container Profile">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/dishant-panchal-6b40b62aa/" target="_blank" class="footer-social-icon" title="LinkedIn Professional Networks">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+
+            <!-- Requested Copywrite Structure -->
+            <p>© 2026 All Rights Reserved.</p>
+            <p>Built with passion for DevOps, Cloud, and Automation.</p>
+            </div>
+        </div>
     </footer>
 
     <!-- Scripts -->
@@ -455,12 +504,13 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        AOS.init({ duration: 600, once: false});
+        AOS.init({ duration: 800, once: false});
         
         new Typed('#typed', {
             strings: ['Dishant Panchal', 'a DevOps Engineer'],
             typeSpeed: 50, backSpeed: 30, loop: true
         });
+
     </script>
 </body>
 </html>
